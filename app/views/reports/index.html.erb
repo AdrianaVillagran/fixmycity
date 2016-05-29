@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Reports#index</h1>
+  <% @reports.each do |report| %>
+    <h4><%= report.title %></h4>
+    <p>
+      <strong>Description: </strong> <%= report.description %> <br>
+      <strong>Major Road: </strong> <%= report.major_road %> <br>
+      <strong>Cross Street 1:</strong> <%= report.cross_street1 %><br>
+      <strong>Cross Street 2:</strong> <%= report.cross_street2 %><br>
+      <strong>Upvotes: </strong> <%= report.upvotes %> <br>
+      <strong>Downvotes: </strong> <%= report.downvotes %> <br>
+    </p>
+  <% end %>
+</div>

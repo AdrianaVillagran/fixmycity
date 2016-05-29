@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'site#index'
+  root to: "reports#index"
 
   get 'site/index'
   resources :reports

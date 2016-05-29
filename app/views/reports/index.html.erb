@@ -1,5 +1,6 @@
 <div class="container">
-  <h1>Reports#index</h1>
+  <a class="modal-trigger waves-effect waves-light btn right red" href="#report-modal">Report an Issue</a>
+  <h1>All Reports</h1>
   <% @reports.each do |report| %>
     <h4><%= report.title %></h4>
     <p>
@@ -11,4 +12,16 @@
       <strong>Downvotes: </strong> <%= report.downvotes %> <br>
     </p>
   <% end %>
+
+
+<!-- Modal Structure -->
+<div id="report-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Report an Issue</h4>
+    <%= render "form" %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+  </div>
+</div>
 </div>

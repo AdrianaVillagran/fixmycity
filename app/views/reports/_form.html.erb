@@ -1,0 +1,29 @@
+<%= form_for @report do |f| %>
+  <div class="s6">
+    <%= f.label :category %>
+    <%= f.select(:category, ["Choose a Category", "Vandalism", "Road Maintenance","Street Signage","Other"], {}, {:class => "browser-default"})%>
+  </div>
+  <div class="s12">
+    <%= f.label :title %>
+    <%= f.text_field :title,required: true %>
+  </div>
+  <div class="s12">
+    <%= f.label :description %>
+    <%= f.text_area :description,required: true %>
+  </div>
+  <div class="s6">
+    <%= f.label :major_road %>
+    <%= f.text_field :major_road, required: true %>
+  </div>
+  <div class="s6">
+    <%= f.label :cross_street1 %>
+    <%= f.text_field :cross_street1 %>
+  </div>
+  <div class="s6">
+    <%= f.label :cross_street2 %>
+    <%= f.text_field :cross_street2 %>
+  </div>
+  <div class="s6">
+  <%= f.submit "Submit", class: "modal-action modal-close btn waves-effect waves-light"%>
+  </div>
+<% end %>

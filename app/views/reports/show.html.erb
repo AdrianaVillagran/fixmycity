@@ -1,0 +1,11 @@
+<h4><%= @report.title %> </h4>
+<p>
+  <strong>Description: </strong>  <%= @report.description %> <br>
+  <strong>Major Road: </strong> <%= @report.major_road %> <br>
+  <strong>Cross Street 1:</strong> <%= @report.cross_street1 %><br>
+  <strong>Cross Street 2:</strong> <%= @report.cross_street2 %><br>
+  <strong>Upvotes: </strong> <%= @report.upvotes %> <br>
+  <strong>Downvotes: </strong> <%= @report.downvotes %> <br>
+</p>
+
+<%= button_to "All Reports", reports_path, method: :get, class: "waves-effect waves-light btn" %>

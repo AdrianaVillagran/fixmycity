@@ -1,7 +1,7 @@
 <%= form_for @report do |f| %>
   <div class="s6">
     <%= f.label :category %>
-    <%= f.select(:category, ["Vandalism","Road Maintenance","Street Signage","Other"], {}, {:class => "browser-default"})%>
+    <%= f.select(:category, ["Choose a Category", "Vandalism", "Road Maintenance","Street Signage","Other"], {}, {:class => "browser-default"})%>
   </div>
   <div class="s12">
     <%= f.label :title %>

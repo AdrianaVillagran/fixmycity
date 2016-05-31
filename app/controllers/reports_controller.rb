@@ -24,6 +24,18 @@ class ReportsController < ApplicationController
   def destroy
   end
 
+
+  def confirm
+    @report = Report.find_by_id(params[:id])
+
+    #changes status to confirmed
+    @report.status = :confirmed
+
+    #updates the report
+    @report.confirmed!
+    redirect_to report_path(@report)
+  end
+
   private
 
   def report_params

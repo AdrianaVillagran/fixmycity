@@ -1,2 +1,14 @@
-<h1>ConfirmedIssues#index</h1>
-<p>Find me in app/views/confirmed_issues/index.html.erb</p>
+<h2>All Confirmed Issues</h2>
+<% @confirmed_issues.each do |issue| %>
+
+  <h4><%= link_to "#{issue.title}", confirmed_issue_path(issue) %></h4>
+  <span class="flow-text">
+    <strong>Notes: </strong>  <%= issue.notes %> <br>
+    <strong>Category: </strong>  <%= issue.category.capitalize %> <br>
+    <strong>Danger Level: </strong>  <%= issue.danger_level.capitalize %> <br>
+    <strong>Status: </strong>  <%= issue.status.capitalize %> <br>
+    <strong>Major Road: </strong> <%= issue.major_road %> <br>
+    <strong>Cross Street 1:</strong> <%= issue.cross_street1 %><br>
+    <strong>Cross Street 2:</strong> <%= issue.cross_street2 %><br>
+  </span>
+<% end %>

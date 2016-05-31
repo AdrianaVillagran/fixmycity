@@ -1,0 +1,20 @@
+<nav>
+  <div class="nav-wrapper blue-grey lighten-3">
+    <a href="/reports" class="brand-logo">Fix My City</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a class="modal-trigger waves-effect waves-light red btn"
+             href="#report-modal">Report an Issue</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Modal Structure -->
+<div id="report-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Report an Issue</h4>
+    <%= render "reports/form" %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+  </div>
+</div>

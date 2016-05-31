@@ -1,2 +1,10 @@
-<h1>ConfirmedIssues#show</h1>
-<p>Find me in app/views/confirmed_issues/show.html.erb</p>
+<h2><%= @confirmed_issue.title %></h2>
+<span class="flow-text">
+  <strong>Notes: </strong>  <%= @confirmed_issue.notes %> <br>
+  <strong>Category: </strong>  <%= @confirmed_issue.category.capitalize %> <br>
+  <strong>Danger Level: </strong>  <%= @confirmed_issue.danger_level.capitalize %> <br>
+  <strong>Status: </strong>  <%= @confirmed_issue.status.capitalize %> <br>
+  <strong>Major Road: </strong> <%= @confirmed_issue.major_road %> <br>
+  <strong>Cross Street 1:</strong> <%= @confirmed_issue.cross_street1 %><br>
+  <strong>Cross Street 2:</strong> <%= @confirmed_issue.cross_street2 %><br>
+</span>

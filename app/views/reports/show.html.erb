@@ -1,13 +1,13 @@
 <h4><%= @report.title %> </h4>
-<p>
+<span class="flow-text">
   <strong>Description: </strong>  <%= @report.description %> <br>
-  <strong>Status: </strong>  <%= @report.status %> <br>
+  <strong>Status: </strong>  <%= @report.status.capitalize %> <br>
   <strong>Major Road: </strong> <%= @report.major_road %> <br>
   <strong>Cross Street 1:</strong> <%= @report.cross_street1 %><br>
   <strong>Cross Street 2:</strong> <%= @report.cross_street2 %><br>
   <strong>Upvotes: </strong> <%= @report.upvotes %> <br>
   <strong>Downvotes: </strong> <%= @report.downvotes %> <br>
-</p>
+</span>
 
 
 <%= button_to reports_path, method: :get, class: "waves-effect waves-light btn" do %>

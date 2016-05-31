@@ -3,6 +3,7 @@
     <h4><%= link_to "#{report.title}", report_path(report) %></h4>
     <span class="flow-text">
       <strong>Description: </strong>  <%= report.description %> <br>
+      <strong>Danger Level: </strong>  <%= report.danger_level.capitalize %> <br>
       <strong>Status: </strong>  <%= report.status.capitalize %> <br>
       <strong>Major Road: </strong> <%= report.major_road %> <br>
       <strong>Cross Street 1:</strong> <%= report.cross_street1 %><br>

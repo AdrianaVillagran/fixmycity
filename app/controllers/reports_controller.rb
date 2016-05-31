@@ -15,6 +15,15 @@ class ReportsController < ApplicationController
     @report = Report.find_by_id(params[:id])
   end
 
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
   private
 
   def report_params

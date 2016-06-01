@@ -40,7 +40,7 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :description, :category, :major_road,
-                                   :cross_street1, :cross_street2)
+                                   :cross_street1, :cross_street2, :danger_level)
   end
 
 end

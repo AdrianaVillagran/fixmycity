@@ -1,9 +1,18 @@
-<h4><%= @report.title %> </h4>
+<div class="row">
+  <h3><%= @report.title %></h3>
+  <h4>  <strong>Status: </strong>  <%= @report.status %>
+        <% if @report.confirmed? %>
+          <i class="small material-icons green-text">done</i>
+        <% end %>
+  </h4>
+</div>
+
+
+<br>
 <span class="flow-text">
   <strong>Description: </strong>  <%= @report.description %> <br>
   <strong>Category: </strong>  <%= @report.category %> <br>
   <strong>Danger Level: </strong>  <%= @report.danger_level%> <br>
-  <strong>Status: </strong>  <%= @report.status %> <br>
   <strong>Major Road: </strong> <%= @report.major_road %> <br>
   <strong>Cross Street 1:</strong> <%= @report.cross_street1 %><br>
   <strong>Cross Street 2:</strong> <%= @report.cross_street2 %><br>
@@ -11,9 +20,10 @@
   <strong>Downvotes: </strong> <%= @report.downvotes %> <br>
 </span>
 
-
-<%= button_to confirm_report_path(@report),
-    :action => "confirm",
-    class: "waves-effect waves-light btn" do %>
-    Confirm Report
+<% if !@report.confirmed? %>
+  <%= button_to confirm_report_path(@report),
+      :action => "confirm",
+      class: "waves-effect waves-light btn" do %>
+      Confirm Report
+  <% end %>
 <% end %>

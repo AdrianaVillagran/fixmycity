@@ -2,7 +2,9 @@
      href="#report-modal">Report an Issue</a>
 
   <h1>All Reports</h1>
+
   <% @reports.each do |report| %>
+    <% if !report.confirmed? %>
     <h4><%= link_to "#{report.title}", report_path(report) %></h4>
     <span class="flow-text">
       <strong>Description: </strong>  <%= report.description %> <br>
@@ -15,6 +17,7 @@
       <strong>Upvotes: </strong> <%= report.upvotes %> <br>
       <strong>Downvotes: </strong> <%= report.downvotes %> <br>
     </span>
+    <% end %>
   <% end %>
 
   <!-- Modal Structure -->

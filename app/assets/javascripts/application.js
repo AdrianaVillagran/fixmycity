@@ -15,8 +15,3 @@
 //= require materialize-sprockets
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function(){
-  console.log("reports.js is loaded!");
-  $('.modal-trigger').leanModal();
-});

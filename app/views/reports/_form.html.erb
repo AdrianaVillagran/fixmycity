@@ -1,11 +1,17 @@
 <%= form_for @report do |f| %>
-  <div class="s6">
-    <%= f.label :category %>
-    <%= f.select(:category, ["Choose a Category", "Vandalism", "Road Maintenance","Street Signage","Other"], {}, {:class => "browser-default"})%>
-  </div>
   <div class="s12">
     <%= f.label :title %>
     <%= f.text_field :title,required: true %>
+  </div>
+  <div class="select">
+    <%= f.label :category %>
+    <%= f.select(:category, ["Pothole", "Sidewalk", "Streetlight", "Traffic Signal", "Signage",
+                    "Road Obstruction", "Pavement", "Powerline", "Vandalism", "Animal Control",
+                    "Other"], {}, {:class => "browser-default"})%>
+  </div>
+  <div class="select">
+    <%= f.label :danger_level %>
+    <%= f.select(:danger_level, ["Mild", "Moderate", "Severe"], {}, {:class => "browser-default"})%>
   </div>
   <div class="s12">
     <%= f.label :description %>

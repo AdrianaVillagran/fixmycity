@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
   def destroy
   end
 
-
+  # POST reports/confirm # creates a new confirmed issue
   def confirm
     @report = Report.find_by_id(params[:id])
 
@@ -33,7 +33,24 @@ class ReportsController < ApplicationController
 
     #updates the report
     @report.confirmed!
-    redirect_to report_path(@report)
+
+    #store relevant attributes from report
+    confirmed_issue_params = {
+      title: @report.title,
+      category: @report.category,
+      danger_level: @report.danger_level,
+      major_road: @report.major_road,
+      cross_street1: @report.cross_street1,
+      cross_street2: @report.cross_street2,
+      latitude: @report.latitude,
+      longitude: @report.longitude
+      }
+
+    #create a new confirmed issue record
+    ci = @report.confirmed_issues.create(confirmed_issue_params)
+
+    #redirect to edit confirmed issue form with ci data
+    redirect_to edit_confirmed_issue_path(ci)
   end
 
   private

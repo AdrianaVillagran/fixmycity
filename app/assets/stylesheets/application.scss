@@ -16,6 +16,17 @@
  $primary-color: color("blue", "lighten-2") !default;
  @import 'materialize';
 
+
+ #map {
+     display: block;
+     position: relative;
+     height: 800px;
+     width: 100%;
+     bottom:0;
+     top:-1px;
+     z-index:10;
+ }
+
  .brand-logo {
    margin-left: 20px;
    font-weight: 400;

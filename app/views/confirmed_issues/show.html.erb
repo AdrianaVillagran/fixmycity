@@ -1,10 +1,24 @@
+<%= link_to edit_confirmed_issue_path(@confirmed_issue),
+    method: :get,
+    class: "btn-floating btn-large waves-effect waves-light btn right" do %>
+    <i class="material-icons">mode_edit</i>
+<% end %>
+
 <h2><%= @confirmed_issue.title %></h2>
 <span class="flow-text">
   <strong>Notes: </strong>  <%= @confirmed_issue.notes %> <br>
-  <strong>Category: </strong>  <%= @confirmed_issue.category.capitalize %> <br>
-  <strong>Danger Level: </strong>  <%= @confirmed_issue.danger_level.capitalize %> <br>
-  <strong>Status: </strong>  <%= @confirmed_issue.status.capitalize %> <br>
+  <strong>Category: </strong>  <%= @confirmed_issue.category %> <br>
+  <strong>Danger Level: </strong>  <%= @confirmed_issue.danger_level %> <br>
+  <strong>Status: </strong>  <%= @confirmed_issue.status %> <br>
   <strong>Major Road: </strong> <%= @confirmed_issue.major_road %> <br>
   <strong>Cross Street 1:</strong> <%= @confirmed_issue.cross_street1 %><br>
   <strong>Cross Street 2:</strong> <%= @confirmed_issue.cross_street2 %><br>
+  <br>
+
+  <strong>Reports: </strong>
+  <ol>
+    <% @confirmed_issue.reports.each do |report| %>
+        <li> <%= link_to "#{report.title}", report_path(report) %> </li>
+    <% end %>
+  </ol>
 </span>

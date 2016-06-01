@@ -1,5 +1,9 @@
 <%= form_for @report do |f| %>
   <div class="s12">
+    <%= f.label :address %>
+    <%= f.text_field :address,required: true %>
+  </div>
+  <div class="s12">
     <%= f.label :title %>
     <%= f.text_field :title,required: true %>
   </div>

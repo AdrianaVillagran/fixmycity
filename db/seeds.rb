@@ -3,7 +3,7 @@ ConfirmedIssue.destroy_all
 
 Report.create({title: "Pothole on Fulton",
             description: "Large pothole almost threw me off my bike. This one needs fixing STAT!",
-            category: "Pothole", #change to enum
+            category: "Pothole",
             major_road: "Fulton Ave",
             cross_street1: "10th Ave",
             cross_street2: "11th Ave",
@@ -11,9 +11,8 @@ Report.create({title: "Pothole on Fulton",
             status: 1,
             upvotes: 3,
             downvotes: 0,
-            latitude: 37.773286,
-            longitude: -122.468676})
-            #add danger_level
+            address: "3428 Fulton St, San Francisco, CA"})
+
 Report.create({title: "Missing street sign at Bush and Larkin intersection",
             description: "There are no Bush street signs at this interection which makes it
                           impossible to tell where you are. I missed the turn on the way to
@@ -26,8 +25,8 @@ Report.create({title: "Missing street sign at Bush and Larkin intersection",
             danger_level: 0,
             upvotes: 1,
             downvotes: 0,
-            latitude:37.788953,
-            longitude: -122.418667})
+            address: "1200 Larkin St, San Francisco, CA"
+            })
 Report.create({title: "Tree branch broke off and is blocking part of street",
             description: "The storm last night broke off a tree branch right off
                           the panhandle and is now blocking part of the leftmost
@@ -40,8 +39,8 @@ Report.create({title: "Tree branch broke off and is blocking part of street",
             cross_street2: "Ashbury",
             upvotes: 7,
             downvotes: 0,
-            latitude: 37.771932,
-            longitude: -122.446827})
+            address: "1598 Oak St, San Francisco, CA"
+            })
 Report.create({title: "Ha I'm a troll",
             description: "Troll troll troll troll troll troll troll troll troll
                           troll!",
@@ -53,8 +52,7 @@ Report.create({title: "Ha I'm a troll",
             cross_street2: "Troll St",
             upvotes: 0,
             downvotes: -5,
-            latitude: 37.771932,
-            longitude: -122.446827})
+            address: "6101 Geary Blvd, San Francisco, CA"})
 ConfirmedIssue.create({title: "Pothole on Fulton",
             notes: "Sent notification to assess damage",
             category: 0,

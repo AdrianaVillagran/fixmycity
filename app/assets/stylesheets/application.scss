@@ -16,28 +16,21 @@
  $primary-color: color("blue", "lighten-2") !default;
  @import 'materialize';
 
- html,body {
-   width:100%;
-   height:100%;
-   margin:0;
-   padding:0;
+ body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
  }
 
- #map-wrapper {
-   position: relative;
+ main {
+   flex: 1 0 auto;
  }
 
- #over-map {
-   position: absolute;
-   top: 10px;
-   left: 80%;
-   z-index: 2;
- }
 
  #map {
      display: block;
      position: relative;
-     height: 1000px;
+     min-height: 95vh;
      width: 100%;
      bottom:0;
      top:-1px;

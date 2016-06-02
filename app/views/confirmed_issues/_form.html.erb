@@ -23,17 +23,14 @@
       <%= f.label :notes %>
       <%= f.text_area :notes %>
     </div>
-    <div class="s12">
-      <%= f.label :major_road %>
-      <%= f.text_field :major_road %>
-    </div>
-    <div class="s12">
-      <%= f.label :cross_street1 %>
-      <%= f.text_field :cross_street1 %>
-    </div>
-    <div class="s12">
-      <%= f.label :cross_street2 %>
-      <%= f.text_field :cross_street2 %>
+    <div class="edit-select">
+      <%= f.label :reports %>
+      <%= f.collection_check_boxes :id, @unconfirmed_reports, :id, :title do |b| %>
+        <div class="collection_check_box">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
     </div>
 
     <%= f.submit "Submit", class: "modal-action modal-close btn waves-effect waves-light"%>

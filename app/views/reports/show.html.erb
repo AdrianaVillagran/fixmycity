@@ -21,6 +21,13 @@
       <strong>Downvotes: </strong> <%= @report.downvotes %> <br>
     </p>
 
+    <span class="flow-text">
+      Possibly Related Reports:
+    </span>
+
+
+
+    <br>
     <% if !@report.confirmed? %>
       <%= button_to confirm_report_path(@report),
           :action => "confirm",

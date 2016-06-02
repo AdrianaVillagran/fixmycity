@@ -23,10 +23,27 @@ class ConfirmedIssuesController < ApplicationController
   end
 
   def edit
+    reports = Report.all
+    @unconfirmed_reports = []
+    reports.each do |report|
+      if !report.confirmed?
+        @unconfirmed_reports << report
+      end
+    end
+
   end
 
   def update
+    p confirmed_issue_params
     @confirmed_issue.update(confirmed_issue_params)
+
+    params[:confirmed_issue][:id].each do |num|
+      if !num.blank?
+        report = Report.find(num.to_i)
+        @confirmed_issue.reports << report
+      end
+    end
+
     redirect_to confirmed_issue_path
   end
 

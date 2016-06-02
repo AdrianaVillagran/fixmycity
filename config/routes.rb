@@ -1,61 +1,38 @@
 Rails.application.routes.draw do
 
-  root to: 'site#index'
+  root to: "reports#index"
 
   get 'site/index'
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  resources :reports
+  resources :confirmed_issues
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
+
+##################
+#                #
+#    ROUTES      #
+#                #
+##################
+
+#                 root GET    /                                    reports#index
+#           site_index GET    /site/index(.:format)                site#index
+#       confirm_report POST   /reports/:id/confirm(.:format)       reports#confirm
+#              reports GET    /reports(.:format)                   reports#index
+#                      POST   /reports(.:format)                   reports#create
+#           new_report GET    /reports/new(.:format)               reports#new
+#          edit_report GET    /reports/:id/edit(.:format)          reports#edit
+#               report GET    /reports/:id(.:format)               reports#show
+#                      PATCH  /reports/:id(.:format)               reports#update
+#                      PUT    /reports/:id(.:format)               reports#update
+#                      DELETE /reports/:id(.:format)               reports#destroy
+#     confirmed_issues GET    /confirmed_issues(.:format)          confirmed_issues#index
+#                      POST   /confirmed_issues(.:format)          confirmed_issues#create
+#  new_confirmed_issue GET    /confirmed_issues/new(.:format)      confirmed_issues#new
+# edit_confirmed_issue GET    /confirmed_issues/:id/edit(.:format) confirmed_issues#edit
+#      confirmed_issue GET    /confirmed_issues/:id(.:format)      confirmed_issues#show
+#                      PATCH  /confirmed_issues/:id(.:format)      confirmed_issues#update
+#                      PUT    /confirmed_issues/:id(.:format)      confirmed_issues#update
+#                      DELETE /confirmed_issues/:id(.:format)      confirmed_issues#destroy

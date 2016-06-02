@@ -5,10 +5,13 @@ class ConfirmedIssuesController < ApplicationController
   def index
     @confirmed_issues = ConfirmedIssue.all
     @hash = Gmaps4rails.build_markers(@confirmed_issues) do |issue, marker|
-      issue_path = view_context.link_to issue.title, confirmed_issue_path(issue), :"data-no-turbolink" => true
+      issue_path = view_context.link_to "View Details", confirmed_issue_path(issue), :"data-no-turbolink" => true
       marker.lat issue.latitude
       marker.lng issue.longitude
-      marker.infowindow "<b>#{issue_path}</b>"
+      marker.infowindow "<b>Issue ##{issue.id}</b><br>
+                        #{issue.title}<br>
+                        Category: #{issue.category}<br>
+                        #{issue_path}<br>"
     end
   end
 

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :reports
   resources :confirmed_issues
 
-
 end
 
 ##################

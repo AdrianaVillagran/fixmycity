@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get 'site/index'
 
   post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
-  resources :reports
 
+
+  resources :reports
   resources :confirmed_issues
+
 
 end
 

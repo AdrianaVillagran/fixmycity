@@ -1,7 +1,8 @@
 class ReportsController < ApplicationController
   def index
-    @reports = Report.all
+
     @report = Report.new
+    @reports = Report.all
     @hash = Gmaps4rails.build_markers(@reports) do |report, marker|
       report_path = view_context.link_to report.title, report_path(report), :"data-no-turbolink" => true
       marker.lat report.latitude

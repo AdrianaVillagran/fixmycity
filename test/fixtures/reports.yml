@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  category: MyString
+  major_road: MyString
+  cross_street1: MyString
+  cross_street2: MyString
+  latitude: 1.5
+  longitude: 1.5
+  upvotes: 1
+  downvotes: 1
+
+two:
+  title: MyString
+  description: MyString
+  category: MyString
+  major_road: MyString
+  cross_street1: MyString
+  cross_street2: MyString
+  latitude: 1.5
+  longitude: 1.5
+  upvotes: 1
+  downvotes: 1

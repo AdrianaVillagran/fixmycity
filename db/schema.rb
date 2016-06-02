@@ -11,9 +11,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+
+ActiveRecord::Schema.define(version: 20160601220151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "confirmed_issues", force: :cascade do |t|
+    t.string   "title"
+    t.string   "notes"
+    t.integer  "category"
+    t.integer  "danger_level"
+    t.integer  "status"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "major_road"
+    t.string   "cross_street1"
+    t.string   "cross_street2"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "confirmed_issues_reports", id: false, force: :cascade do |t|
+    t.integer "confirmed_issue_id", null: false
+    t.integer "report_id",          null: false
+  end
+
+  add_index "confirmed_issues_reports", ["confirmed_issue_id", "report_id"], name: "idx_confirmed_issue_report", using: :btree
+  add_index "confirmed_issues_reports", ["report_id", "confirmed_issue_id"], name: "idx_report_confirmed_issue", using: :btree
+
+  create_table "reports", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "category"
+    t.string   "major_road"
+    t.string   "cross_street1"
+    t.string   "cross_street2"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "upvotes"
+    t.integer  "downvotes"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "status",        default: 0
+    t.integer  "danger_level"
+    t.string   "address"
+  end
 
 end

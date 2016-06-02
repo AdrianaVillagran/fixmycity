@@ -2,8 +2,8 @@
   <div class="nav-wrapper blue-grey lighten-3">
     <a href="/reports" class="brand-logo">Fix My City</a>
     <ul class="right hide-on-med-and-down">
-      <li> <a href="/reports"> All User Reports</a> </li>
-      <li> <a href="/confirmed_issues"> Confirmed Issues</a> </li>
+      <li> <%= link_to "All User Reports", reports_path, :"data-no-turbolink" => true %> </li>
+      <li> <%= link_to "Confirmed Issues", confirmed_issues_path, :"data-no-turbolink" => true %> </li>
     </ul>
   </div>
 </nav>

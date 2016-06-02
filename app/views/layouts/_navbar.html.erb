@@ -4,8 +4,6 @@
     <ul class="right hide-on-med-and-down">
       <li> <%= link_to "All User Reports", reports_path, :"data-no-turbolink" => true %> </li>
       <li> <%= link_to "Confirmed Issues", confirmed_issues_path, :"data-no-turbolink" => true %> </li>
-      <li> <a class="modal-trigger waves-effect waves-light red btn"
-              href="#report-modal">Report an Issue</a></li>
     </ul>
   </div>
 </nav>
@@ -17,6 +15,6 @@
     <%= render "reports/form" %>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    <a href="#!" data-no-turbolink="true" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
   </div>
 </div>

@@ -4,10 +4,14 @@ class ReportsController < ApplicationController
     @report = Report.new
     @reports = Report.all
     @hash = Gmaps4rails.build_markers(@reports) do |report, marker|
-      report_path = view_context.link_to report.title, report_path(report), :"data-no-turbolink" => true
+      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
       marker.lat report.latitude
       marker.lng report.longitude
-      marker.infowindow "<b>#{report_path}</b>"
+      marker.infowindow "<b>Report ##{report.id}</b><br>
+                        #{report.title}<br>
+                        Category: #{report.category}<br>
+                        #{report.address}<br>
+                        #{report_path}<br>"
     end
   end
 
@@ -20,6 +24,16 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find_by_id(params[:id])
+    @hash = Gmaps4rails.build_markers(@report) do |report, marker|
+      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
+      marker.lat report.latitude
+      marker.lng report.longitude
+      marker.infowindow "<b>Report ##{report.id}</b><br>
+                        #{report.title}<br>
+                        Category: #{report.category}<br>
+                        #{report.address}<br>
+                        #{report_path}<br>"
+    end
   end
 
   def edit

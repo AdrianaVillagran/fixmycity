@@ -3,7 +3,8 @@
     <h5>All User Reports</h5>
     <% @reports.each do |report| %>
       <b>Report #<%= report.id %></b> <br>
-      <%= link_to report.title, report_path(report) %> <br><br>
+      <%= link_to report.title, report_path(report) %> <br>
+      Status: <%= report.status %> <br><br>
     <% end %>
   </div>
   <div class="col s9">

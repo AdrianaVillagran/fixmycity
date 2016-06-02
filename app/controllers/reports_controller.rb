@@ -67,7 +67,11 @@ class ReportsController < ApplicationController
   def update
     @report = Report.find_by_id(params[:id])
     if @report.update(report_params)
+      flash[:notice] = "Report has been successfully updated"
       redirect_to report_path(@report)
+    else
+      flash[:error] = @report.errors.full_messages
+      redirect_to edit_report_path(@report)
     end
   end
 
@@ -110,7 +114,7 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :latitude, :longitude, :description,
-                                   :category, :major_road, :address,
+                                   :category, :major_road, :address, :status, 
                                    :cross_street1, :cross_street2, :danger_level)
   end
 

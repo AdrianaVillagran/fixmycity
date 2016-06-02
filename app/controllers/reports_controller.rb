@@ -4,10 +4,14 @@ class ReportsController < ApplicationController
     @report = Report.new
     @reports = Report.all
     @hash = Gmaps4rails.build_markers(@reports) do |report, marker|
-      report_path = view_context.link_to report.title, report_path(report), :"data-no-turbolink" => true
+      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
       marker.lat report.latitude
       marker.lng report.longitude
-      marker.infowindow "<b>#{report_path}</b>"
+      marker.infowindow "<b>Report ##{report.id}</b><br>
+                        #{report.title}<br>
+                        Category: #{report.category}<br>
+                        #{report.address}<br>
+                        #{report_path}<br>"
     end
   end
 
@@ -22,13 +26,22 @@ class ReportsController < ApplicationController
     @report = Report.find_by_id(params[:id])
   end
 
-  def edit
-  end
+  def find_related
+    @report = Report.new
 
-  def update
-  end
+    # find all records
+    @reports = Report.all
 
-  def destroy
+    @reports.each do |report|
+      distance = 0.1
+      @all_centers = []
+      @all_centers.push([report.latitude, report.longitude])
+
+      # box = Geocoder::Calculations.bounding_box(center_point, distance)
+      # @related = Report.within_bounding_box(box)
+      # p @related
+    end
+    render :related
   end
 
   # POST reports/confirm # creates a new confirmed issue

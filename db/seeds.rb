@@ -27,6 +27,34 @@ Report.create({title: "Missing street sign at Bush and Larkin intersection",
             downvotes: 0,
             address: "1200 Larkin St, San Francisco, CA"
             })
+Report.create({title: "Not Enough Street signs",
+            description: "There are no Bush street signs at this interection which makes it
+                          impossible to tell where you are. I missed the turn on the way to
+                          work because of it.",
+            category: "Signage",
+            major_road: "Bush",
+            cross_street1: "Bush",
+            cross_street2: "Larkin",
+            status: 0,
+            danger_level: 0,
+            upvotes: 1,
+            downvotes: 0,
+            address: "1205 Larkin St, San Francisco, CA"
+            })
+Report.create({title: "Missing street sign",
+            description: "There are no Bush street signs at this interection which makes it
+                          impossible to tell where you are. I missed the turn on the way to
+                          work because of it.",
+            category: "Signage",
+            major_road: "Bush",
+            cross_street1: "Bush",
+            cross_street2: "Larkin",
+            status: 0,
+            danger_level: 0,
+            upvotes: 1,
+            downvotes: 0,
+            address: "1210 Larkin St, San Francisco, CA"
+            })
 Report.create({title: "Tree branch broke off and is blocking part of street",
             description: "The storm last night broke off a tree branch right off
                           the panhandle and is now blocking part of the leftmost

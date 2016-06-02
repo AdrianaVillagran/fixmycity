@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
 
+  get 'related_reports', to: "reports#find_related", as: 'find_related_reports'
+
 
   resources :reports
   resources :confirmed_issues

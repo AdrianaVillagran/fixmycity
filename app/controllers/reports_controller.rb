@@ -26,21 +26,21 @@ class ReportsController < ApplicationController
     p params[:id]
     @report = Report.find_by_id(params[:id])
 
-    # distance = 0.1
-    # center_point = [@report.latitude, @report.longitude]
-    # box = Geocoder::Calculations.bounding_box(center_point, distance)
-    # @related_reports = Report.within_bounding_box(box)
-    #
-    # @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
-    #   report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
-    #   marker.lat report.latitude
-    #   marker.lng report.longitude
-    #   marker.infowindow "<b>Report ##{report.id}</b><br>
-    #                     #{report.title}<br>
-    #                     Category: #{report.category}<br>
-    #                     #{report.address}<br>
-    #                     #{report_path}<br>"
-    # end
+    distance = 0.1
+    center_point = [@report.latitude, @report.longitude]
+    box = Geocoder::Calculations.bounding_box(center_point, distance)
+    @related_reports = Report.within_bounding_box(box)
+
+    @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
+      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
+      marker.lat report.latitude
+      marker.lng report.longitude
+      marker.infowindow "<b>Report ##{report.id}</b><br>
+                        #{report.title}<br>
+                        Category: #{report.category}<br>
+                        #{report.address}<br>
+                        #{report_path}<br>"
+    end
   end
 
   #
@@ -92,7 +92,7 @@ class ReportsController < ApplicationController
       # # pseudo
       # new_issue = ConfirmedIssue.new.reports << @related_reports
       # new_issue.save
-  
+
   end
 
   private

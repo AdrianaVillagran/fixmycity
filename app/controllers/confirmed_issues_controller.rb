@@ -4,6 +4,7 @@ class ConfirmedIssuesController < ApplicationController
 
   def index
     @confirmed_issues = ConfirmedIssue.all
+
     @hash = Gmaps4rails.build_markers(@confirmed_issues) do |issue, marker|
       issue_path = view_context.link_to "View Details", confirmed_issue_path(issue), :"data-no-turbolink" => true
       marker.lat issue.latitude
@@ -16,6 +17,7 @@ class ConfirmedIssuesController < ApplicationController
   end
 
   def show
+
   end
 
   def new
@@ -27,6 +29,8 @@ class ConfirmedIssuesController < ApplicationController
     @unconfirmed_reports = []
     reports.each do |report|
       if !report.confirmed?
+        report.status = :confirmed
+        report.confirmed!
         @unconfirmed_reports << report
       end
     end
@@ -62,7 +66,7 @@ class ConfirmedIssuesController < ApplicationController
   end
 
   def new_report
-    # set report for report and issue button in navbar
+    # set report for report an issue button
     @report = Report.new
   end
 end

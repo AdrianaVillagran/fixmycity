@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col s3 sidebar">
-    <h5>All Reports</h5>
+    <h5>All User Reports</h5>
     <% @reports.each do |report| %>
       <b>Report #<%= report.id %></b> <br>
       <%= link_to report.title, report_path(report) %> <br><br>

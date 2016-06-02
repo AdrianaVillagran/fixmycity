@@ -5,58 +5,17 @@
 
 
 
-<div class="row">
-  <div class="col s4 blue-grey lighten-5">
-    <h1>All Reports</h1>
 
-    <% @reports.each do |report| %>
-      <% if !report.confirmed? %>
-      <h4><%= link_to "#{report.title}", report_path(report) %></h4>
-      <span>
-        <strong>Description: </strong>  <%= report.description %> <br>
-        <strong>Category: </strong>  <%= report.category %> <br>
-        <strong>Danger Level: </strong>  <%= report.danger_level %> <br>
-        <strong>Status: </strong>  <%= report.status %> <br>
-        <strong>Major Road: </strong> <%= report.major_road %> <br>
-        <strong>Cross Street 1:</strong> <%= report.cross_street1 %><br>
-        <strong>Cross Street 2:</strong> <%= report.cross_street2 %><br>
-        <strong>Upvotes: </strong> <%= report.upvotes %> <br>
-        <strong>Downvotes: </strong> <%= report.downvotes %> <br>
-      </span>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="col s8">
-    <a class="modal-trigger waves-effect waves-light red btn right"
-      href="#report-modal">Report an Issue</a>
       <!-- Map -->
       <div id="map"></div>
 
-  </div>
-</div>
+      <a class="modal-trigger waves-effect waves-light red btn right"
+        href="#report-modal">Report an Issue</a>
 
 
-<script type="text/javascript">
-  handler = Gmaps.build('Google');
-  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      "lat": 0,
-      "lng": 0,
-      "picture": {
-        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-        "width":  32,
-        "height": 32
-      },
-      "infowindow": "hello!"
-    }
-  ]);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds();
-  });
+<script>
+  window.data_hash = <%=raw @hash.to_json %> || null;
 </script>
-
 
 
   <!-- Modal Structure -->

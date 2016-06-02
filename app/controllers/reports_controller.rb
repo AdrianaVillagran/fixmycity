@@ -2,6 +2,12 @@ class ReportsController < ApplicationController
   def index
     @reports = Report.all
     @report = Report.new
+    @hash = Gmaps4rails.build_markers(@reports) do |report, marker|
+      report_path = view_context.link_to report.title, report_path(report), :"data-no-turbolink" => true
+      marker.lat report.latitude
+      marker.lng report.longitude
+      marker.infowindow "<b>#{report_path}</b>"
+    end
   end
 
   def create
@@ -59,7 +65,7 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:title, :latitude, :longitude, :description,
-                                   :category, :major_road, :address, 
+                                   :category, :major_road, :address,
                                    :cross_street1, :cross_street2, :danger_level)
   end
 

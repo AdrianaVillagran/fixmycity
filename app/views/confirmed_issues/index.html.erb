@@ -1,1 +1,16 @@
-<%= render "reports/map" %>
+<div class="row">
+  <div class="col s3 sidebar">
+    <h5>All Confirmed Issues</h5>
+    <% @confirmed_issues.each do |issue| %>
+      <b>Issue #<%= issue.id %></b> <br>
+      <%= link_to issue.title, confirmed_issue_path(issue) %> <br><br>
+    <% end %>
+  </div>
+  <div class="col s9">
+    <div class="fixed-action-btn" style="top: 70px; right: 24px;">
+      <a class="modal-trigger waves-effect waves-light red btn"
+         href="#report-modal">Report an Issue</a>
+    </div>
+    <%= render "reports/map" %>
+  </div>
+</div>

@@ -6,10 +6,8 @@ Rails.application.routes.draw do
 
   post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
 
-
   resources :reports
   resources :confirmed_issues
-
 
 end
 

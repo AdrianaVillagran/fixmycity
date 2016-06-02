@@ -24,7 +24,7 @@
       <%= f.text_area :notes %>
     </div>
     <div class="edit-select">
-      <%= f.label :reports %>
+      <%= f.label :add_reports %>
       <%= f.collection_check_boxes :id, @unconfirmed_reports, :id, :report_with_id do |b| %>
         <div class="collection_check_box">
           <%= b.check_box %>

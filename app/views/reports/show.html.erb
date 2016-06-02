@@ -1,5 +1,11 @@
 <div class="row">
   <div class="col s3">
+    <%= button_to edit_report_path(@report),
+        method: :get,
+        class: "btn-floating btn-medium waves-effect waves-light btn right" do %>
+        <i class="material-icons">mode_edit</i>
+    <% end %>
+
     <h4>Report #<%= @report.id %></h4>
     <span class="flow-text">  <strong>Status: </strong>  <%= @report.status %>
           <% if @report.confirmed? %>
@@ -25,10 +31,9 @@
       <% end %>
     </span>
 
-
-
-
     <br>
+
+
     <% if !@report.confirmed? %>
       <%= button_to confirm_report_path(@report),
           :action => "confirm",

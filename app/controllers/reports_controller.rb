@@ -60,6 +60,17 @@ class ReportsController < ApplicationController
   #   render :related
   # end
 
+  def edit
+    @report = Report.find_by_id(params[:id])
+  end
+
+  def update
+    @report = Report.find_by_id(params[:id])
+    if @report.update(report_params)
+      redirect_to report_path(@report)
+    end
+  end
+
   # POST reports/confirm # creates a new confirmed issue
   def confirm
     @report = Report.find_by_id(params[:id])

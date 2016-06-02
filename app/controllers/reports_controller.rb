@@ -60,6 +60,21 @@ class ReportsController < ApplicationController
   #   render :related
   # end
 
+  def edit
+    @report = Report.find_by_id(params[:id])
+  end
+
+  def update
+    @report = Report.find_by_id(params[:id])
+    if @report.update(report_params)
+      flash[:notice] = "Report has been successfully updated"
+      redirect_to report_path(@report)
+    else
+      flash[:error] = @report.errors.full_messages
+      redirect_to edit_report_path(@report)
+    end
+  end
+
   # POST reports/confirm # creates a new confirmed issue
   def confirm
     @report = Report.find_by_id(params[:id])
@@ -89,17 +104,13 @@ class ReportsController < ApplicationController
       #redirect to edit confirmed issue form with ci data
       return redirect_to edit_confirmed_issue_path(ci)
 
-      # # pseudo
-      # new_issue = ConfirmedIssue.new.reports << @related_reports
-      # new_issue.save
-
   end
 
   private
 
   def report_params
     params.require(:report).permit(:title, :latitude, :longitude, :description,
-                                   :category, :major_road, :address,
+                                   :category, :major_road, :address, :status,
                                    :cross_street1, :cross_street2, :danger_level)
   end
 

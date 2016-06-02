@@ -18,7 +18,7 @@
   <strong>Reports: </strong>
   <ol>
     <% @confirmed_issue.reports.each do |report| %>
-        <li> <%= link_to "#{report.title}", report_path(report) %> </li>
+        <li> <%= link_to "Report ##{report.id}", report_path(report) %> </li>
     <% end %>
   </ol>
 </span>

@@ -1,37 +1,46 @@
-
-  <%= form_for @confirmed_issue do |f| %>
-    <div class="s12">
-      <%= f.label :title %>
-      <%= f.text_field :title,required: true %>
-    </div>
-    <div class="edit-select">
-      <%= f.label :category %>
-      <%= f.select(:category, ["Pothole", "Sidewalk", "Streetlight", "Traffic Signal", "Signage",
-                      "Road Obstruction", "Pavement", "Powerline", "Vandalism", "Animal Control",
-                      "Other"], {}, {:class => "browser-default"})%>
-    </div>
-    <div class="edit-select">
-      <%= f.label :danger_level %>
-      <%= f.select(:danger_level, ["Mild", "Moderate", "Severe"], {}, {:class => "browser-default"})%>
-    </div>
-    <div class="edit-select">
-      <%= f.label :status %>
-      <%= f.select(:status, [:pending, :in_progress, :closed, :hidden], {}, {:class => "browser-default"})%>
-    </div>
-
-    <div class="s12">
-      <%= f.label :notes %>
-      <%= f.text_area :notes %>
-    </div>
-    <div class="edit-select">
-      <%= f.label :reports %>
-      <%= f.collection_check_boxes :id, @unconfirmed_reports, :id, :id do |b| %>
-        <div class="collection_check_box">
-          <%= b.check_box %>
-          <%= b.label %>
+<div class="row">
+  <div class="col s10 offset-s1">
+    <%= form_for @confirmed_issue do |f| %>
+      <div class="s12">
+        <%= f.label :title %>
+        <%= f.text_field :title,required: true %>
+      </div>
+      <div class="row">
+        <div class="col s3">
+          <%= f.label :category %>
+          <%= f.select(:category, ["Pothole", "Sidewalk", "Streetlight", "Traffic Signal", "Signage",
+                          "Road Obstruction", "Pavement", "Powerline", "Vandalism", "Animal Control",
+                          "Other"], {}, {:class => "browser-default"})%>
         </div>
-      <% end %>
-    </div>
+        <div class="col s3">
+          <%= f.label :danger_level %>
+          <%= f.select(:danger_level, ["Mild", "Moderate", "Severe"], {}, {:class => "browser-default"})%>
+        </div>
+        <div class="col s3">
+          <%= f.label :status %>
+          <%= f.select(:status, [:pending, :in_progress, :closed, :hidden], {}, {:class => "browser-default"})%>
+        </div>
+      </div>
 
-    <%= f.submit "Submit", class: "modal-action modal-close btn waves-effect waves-light"%>
-  <% end %>
+
+      <div class="s12">
+        <%= f.label :notes %>
+        <%= f.text_area :notes %>
+      </div>
+
+      <div class="edit-select">
+        <%= f.label :add_other_reports %>
+        <%= f.collection_check_boxes :id, @unconfirmed_reports, :id, :report_with_id do |b| %>
+          <div class="collection_check_box">
+            <%= b.check_box %>
+            <%= b.label %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.submit "Submit", class: "modal-action modal-close btn waves-effect waves-light"%>
+    <% end %>
+
+  </div>
+
+</div>

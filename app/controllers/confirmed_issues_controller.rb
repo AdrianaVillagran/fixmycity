@@ -29,8 +29,6 @@ class ConfirmedIssuesController < ApplicationController
     @unconfirmed_reports = []
     reports.each do |report|
       if !report.confirmed?
-        report.status = :confirmed
-        report.confirmed!
         @unconfirmed_reports << report
       end
     end
@@ -38,13 +36,23 @@ class ConfirmedIssuesController < ApplicationController
   end
 
   def update
-    p confirmed_issue_params
     @confirmed_issue.update(confirmed_issue_params)
 
-    params[:confirmed_issue][:id].each do |num|
-      if !num.blank?
-        report = Report.find(num.to_i)
+    # filter through reports id array in params
+    params[:confirmed_issue][:id].each do |id|
+      if !id.blank?
+        # find reports by id's in array
+        report = Report.find(id.to_i)
+
+        # push reports into confirmed_issue
+        # hacky but it works :/
         @confirmed_issue.reports << report
+
+        # updates each report status to confirmed
+        @confirmed_issue.reports.each do |report|
+          report.status = :confirmed
+          report.confirmed!
+        end
       end
     end
 

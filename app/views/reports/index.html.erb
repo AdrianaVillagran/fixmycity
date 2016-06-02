@@ -2,29 +2,9 @@
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
 
-
-
-
-
-      <!-- Map -->
-      <div id="map"></div>
-
-      <a class="modal-trigger waves-effect waves-light red btn right"
-        href="#report-modal">Report an Issue</a>
-
+<!-- Map -->
+<div id="map"></div>
 
 <script>
   window.data_hash = <%=raw @hash.to_json %> || null;
 </script>
-
-
-  <!-- Modal Structure -->
-  <div id="report-modal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Report an Issue</h4>
-      <%= render "reports/form" %>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-    </div>
-  </div>

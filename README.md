@@ -49,4 +49,4 @@ rake db:seed
 #### Wireframes
 
 #### User Stories
-(https://goo.gl/byrxG6)
+[In-Progress User Stories](https://docs.google.com/document/d/1NeaSV7VfQ83cLsrWC00vbU430tkuhC8d-SqvqPdfAF0/edit?usp=sharing)

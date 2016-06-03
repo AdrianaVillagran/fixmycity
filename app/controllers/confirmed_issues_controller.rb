@@ -19,7 +19,16 @@ class ConfirmedIssuesController < ApplicationController
   end
 
   def show
-
+    reports = @confirmed_issue.reports
+    @hash = Gmaps4rails.build_markers(reports) do |issue, marker|
+      issue_path = view_context.link_to "View Details", confirmed_issue_path(issue), :"data-no-turbolink" => true
+      marker.lat issue.latitude
+      marker.lng issue.longitude
+      marker.infowindow "<b>Issue ##{issue.id}</b><br>
+                        #{issue.title}<br>
+                        Category: #{issue.category}<br>
+                        #{issue_path}<br>"
+    end
   end
 
   def new

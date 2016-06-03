@@ -1,2 +1,20 @@
-Username: <%= @user.username %> <br>
-Role: <%= @user.role %>
+<div class="container user-wrapper">
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <div class="col s3">
+        <img src="http://annual.shrm.org/sites/all/modules/sessionplanner_client/images/default-avatar.png"
+             class="right avatar"/>
+      </div>
+      <div class="col s9">
+        <h4>Profile Info</h4>
+        <span class="flow-text">
+        <b>Username:</b>  <%= @user.username %> <br>
+        <b>Role:</b>  <%= @user.role %> <br>
+        <b>Email:</b> <%= @user.email %> <br>
+        <b>Current City:</b> <%= @user.current_city %>
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>

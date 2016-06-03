@@ -18,7 +18,7 @@
 //= require gmaps/google
 //= require_tree .
 
-var navHeight = 100;
+var navHeight = 50;
 
 function setMapHeight(){
   $("#map").css("height", $( window ).height() - navHeight);
@@ -30,6 +30,8 @@ $(document).on("ready page:load", function(){
     $('.modal-trigger').leanModal();
 
     $(".dropdown-button").dropdown();
+
+    $(".button-collapse").sideNav();
 
     $(window).resize(function(){
       setMapHeight();

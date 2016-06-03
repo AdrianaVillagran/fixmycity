@@ -15,7 +15,6 @@ class ReportsController < ApplicationController
                           Category: #{report.category}<br>
                           #{report.address}<br>
                           #{report_path}<br>"
-
       end
     end
   end

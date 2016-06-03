@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col s8 offset-s2">
+    <h4>Signup</h4>
+    <%= form_for @user, url: '/users' do |f| %>
+
+      Username: <%= f.text_field :username %>
+      Email: <%= f.text_field :email %>
+      <div class="row">
+        <div class="col s6">
+          Current City: <%= f.text_field :current_city %>
+        </div>
+        <div class="col s6">
+          Role: <%= f.select(:role, [:admin, :guest], {}, {:class => "browser-default"})%>
+        </div>
+      </div>
+      Password: <%= f.password_field :password %>
+      Password Confirmation: <%= f.password_field :password_confirmation %>
+      <%= f.submit "Submit" %>
+
+    <% end %>
+  </div>
+</div>

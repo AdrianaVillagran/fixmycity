@@ -4,12 +4,17 @@ Rails.application.routes.draw do
 
   get 'site/index'
 
-  post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
-
-  get 'signup' => 'users#new'
+  # User routes
+  get 'signup', to: 'users#new', as: "new_user"
   post 'users' => 'users#create'
   get 'users/:id', to: 'users#show', as: 'user'
 
+  # Sessions routes
+  get "/login", to: "sessions#new"
+  post "/sessions", to: "sessions#create"
+  get "/logout", to: "sessions#destroy"
+
+  post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
   resources :reports
   resources :confirmed_issues
 

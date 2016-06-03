@@ -14,6 +14,7 @@
 
  @import "materialize/components/color";
  @import 'materialize';
+ @import url(https://fonts.googleapis.com/css?family=Oswald);
 
  html,body {
    width:100%;
@@ -34,6 +35,12 @@
    padding: 20px !important;
  }
 
+ .avatar {
+   width: 200px;
+   display: inline-block;
+   margin: 10px
+ }
+
  #map {
      display: block;
      position: relative;
@@ -49,18 +56,13 @@
    z-index: 4 !important;
  }
 
+ .user-wrapper {
+   margin-top: 30px;
+ }
+
  .brand-logo {
    margin-left: 20px;
    font-weight: 400;
    font-style: italic;
- }
-
- .select {
-   width: 250px !important;
-   display: inline-block !important;
- }
-
- .edit-select {
-   width: 40% !important;
-   display: inline-block !important;
+   font-family: 'Oswald', sans-serif;
  }

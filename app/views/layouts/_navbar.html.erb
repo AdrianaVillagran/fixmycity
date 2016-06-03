@@ -7,6 +7,14 @@
   <div class="nav-wrapper blue-grey lighten-1">
     <a href="/reports" class="brand-logo">Fix My City</a>
     <ul class="right hide-on-med-and-down">
+      <li>
+        <% flash.each do |name, msg| %>
+          <div class="chip <% if name=="error" || name=="alert" %> red <% else %> green lighten-1 <% end %>">
+            <span class="white-text"><%=  msg %></span>
+            <i class="material-icons">close</i>
+          </div>
+        <% end %>
+      </li>
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Reports<i class="material-icons right">arrow_drop_down</i></a></li>
 
       <% if current_user %>
@@ -16,14 +24,7 @@
         <li><%= link_to "Sign Up", new_user_path, :"data-no-turbolink" => true  %></li>
         <li><%= link_to "Log In", login_path, :"data-no-turbolink" => true  %></li>
       <% end %>
-      <li>
-        <% flash.each do |name, msg| %>
-          <div class="chip <% if name=="error" || name=="alert" %> red <% else %> green lighten-1 <% end %>">
-            <span class="white-text"><%=  msg %></span>
-            <i class="material-icons">close</i>
-          </div>
-        <% end %>
-      </li>
+
     </ul>
   </div>
 </nav>

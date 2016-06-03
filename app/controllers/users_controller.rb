@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  before_action :new_report
+
   def new
   end
 
   def create
     @user = User.create(user_params)
-    p @user.role
+    login(@user)
     redirect_to user_path(@user)
   end
 
@@ -14,10 +14,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def new_report
-    @report = Report.new
-  end
 
   def user_params
     params.require(:user).permit(:role, :username, :current_city, :password, :password_confirmation, :email)

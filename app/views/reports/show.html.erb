@@ -41,14 +41,24 @@
       <% end %>
     </div>
 
+    <!-- button to confirm report -->
     <% if !@report.confirmed? && current_user && current_user.admin? %>
       <%= button_to confirm_report_path(@report),
           :action => "confirm",
           class: "waves-effect waves-light btn" do %>
           Confirm Report #<%= @report.id %>
       <% end %>
-
     <% end %>
+
+    <!-- button to hide report -->
+    <% if !@report.hidden? && current_user && current_user.admin? %>
+      <%= button_to hide_report_path(@report),
+          :action => "hide",
+          class: "waves-effect waves-light btn red" do %>
+          Hide Report #<%= @report.id %>
+      <% end %>
+    <% end %>
+
   </div>
 
   <div class="col s9">

@@ -7,7 +7,7 @@
       <% @reports.each do |report| %>
         <% if !report.hidden? %>
           <div class="chip <% if report.status=="flagged" || report.status=="hidden"%>
-                      red <% elsif report.status=="confirmed" %> green lighten-1 <%else %>
+                      red <% elsif report.status=="confirmed" %> teal accent-3<%else %>
                       indigo accent-2 <% end %> right">
               <span class="white-text"><%= report.status %></span>
             </div>

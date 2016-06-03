@@ -28,28 +28,15 @@ class ReportsController < ApplicationController
   end
 
   def show
-
-    if  !current_user || !current_user.admin?
-      flash[:alert] = "That report has been removed."
-      return redirect_to reports_path
-    elsif current_user.admin?
-      p params[:id]
-      @report = Report.find_by_id(params[:id])
-
-      distance = 0.1
-      center_point = [@report.latitude, @report.longitude]
-      box = Geocoder::Calculations.bounding_box(center_point, distance)
-      @related_reports = Report.within_bounding_box(box)
-
-      @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
-        report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
-        marker.lat report.latitude
-        marker.lng report.longitude
-        marker.infowindow "<b>Report ##{report.id}</b><br>
-                          #{report.title}<br>
-                          Category: #{report.category}<br>
-                          #{report.address}<br>
-                          #{report_path}<br>"
+    @report = Report.find_by_id(params[:id])
+    if !@report.hidden?
+      return map_related_reports(@report)
+    else
+      if !current_user || !current_user.admin?
+        flash[:alert] = "That report has been removed."
+        return redirect_to reports_path
+      elsif current_user.admin?
+        map_related_reports(@report)
       end
     end
   end
@@ -66,6 +53,24 @@ class ReportsController < ApplicationController
     else
       flash[:error] = @report.errors.full_messages.join(", ")
       redirect_to edit_report_path(@report)
+    end
+  end
+
+  def map_related_reports(report)
+    distance = 0.1
+    center_point = [report.latitude, report.longitude]
+    box = Geocoder::Calculations.bounding_box(center_point, distance)
+    @related_reports = Report.within_bounding_box(box)
+
+    @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
+      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
+      marker.lat report.latitude
+      marker.lng report.longitude
+      marker.infowindow "<b>Report ##{report.id}</b><br>
+                        #{report.title}<br>
+                        Category: #{report.category}<br>
+                        #{report.address}<br>
+                        #{report_path}<br>"
     end
   end
 

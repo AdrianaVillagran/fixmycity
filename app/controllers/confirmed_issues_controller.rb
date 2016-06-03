@@ -1,8 +1,10 @@
 class ConfirmedIssuesController < ApplicationController
   before_action :new_report
+  before_action :authorize, only: [:edit, :update]
   before_action :set_confirmed_issue
 
   def index
+    @confirmed_issue = ConfirmedIssue.new
     @confirmed_issues = ConfirmedIssue.all
 
     @hash = Gmaps4rails.build_markers(@confirmed_issues) do |issue, marker|

@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   validates :current_city,
             presence: true
 
+
+
   def self.confirm(params)
     @user = User.find_by({email: params[:email]})
     @user.try(:authenticate, params[:password])

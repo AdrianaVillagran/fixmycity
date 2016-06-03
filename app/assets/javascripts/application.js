@@ -29,6 +29,8 @@ $(document).on("ready page:load", function(){
     console.log("sanity check!")
     $('.modal-trigger').leanModal();
 
+    $(".dropdown-button").dropdown();
+
     $(window).resize(function(){
       setMapHeight();
     });

@@ -1,18 +1,41 @@
 <div class="row">
   <div class="col s3 sidebar">
     <h5>All User Reports</h5>
-    <% @reports.each do |report| %>
-      <div class="chip <% if report.status=="flagged"%> red <% elsif report.status=="confirmed" %> green lighten-1 <%else %> indigo accent-2 <% end %> right">
-        <span class="white-text"><%= report.status %></span>
-      </div>
+
+    <!-- logic to hide reports to non-users and users that are not admins -->
+    <% if !current_user || !current_user.admin? %>
+      <% @reports.each do |report| %>
+        <% if !report.hidden? %>
+          <div class="chip <% if report.status=="flagged" || report.status=="hidden"%>
+                      red <% elsif report.status=="confirmed" %> green lighten-1 <%else %>
+                      indigo accent-2 <% end %> right">
+              <span class="white-text"><%= report.status %></span>
+            </div>
+            <div class="">
+              <b>Report #<%= report.id %></b> <br>
+              <%= link_to report.title, report_path(report) %> <br>
+            </div><br><br>
+          <% end %>
+        <% end %>
+
+    <% elsif current_user.admin? %>
+
+      <% @reports.each do |report| %>
+        <div class="chip <% if report.status=="flagged" || report.status=="hidden"%>
+                    red <% elsif report.status=="confirmed" %> green lighten-1 <%else %>
+                    indigo accent-2 <% end %> right">
+          <span class="white-text"><%= report.status %></span>
+        </div>
         <div class="">
           <b>Report #<%= report.id %></b> <br>
           <%= link_to report.title, report_path(report) %> <br>
         </div>
 
         <br><br>
-
+      <% end %>
     <% end %>
+    <!-- end of hide report logic -->
+
   </div>
   <div class="col s9">
     <div class="fixed-action-btn" style="top: 70px; right: 24px; z-index: 3">

@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :authorize, only: [:edit, :update, :confirm]
+
   def index
 
     @report = Report.new

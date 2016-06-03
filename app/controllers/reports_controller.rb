@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :authorize, only: [:edit, :update, :confirm]
+
   def index
 
     @report = Report.new
@@ -23,8 +25,15 @@ class ReportsController < ApplicationController
   end
 
   def show
+    p params[:id]
     @report = Report.find_by_id(params[:id])
-    @hash = Gmaps4rails.build_markers(@report) do |report, marker|
+
+    distance = 0.1
+    center_point = [@report.latitude, @report.longitude]
+    box = Geocoder::Calculations.bounding_box(center_point, distance)
+    @related_reports = Report.within_bounding_box(box)
+
+    @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
       report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
       marker.lat report.latitude
       marker.lng report.longitude
@@ -37,19 +46,25 @@ class ReportsController < ApplicationController
   end
 
   def edit
+    @report = Report.find_by_id(params[:id])
   end
 
   def update
-  end
-
-  def destroy
+    @report = Report.find_by_id(params[:id])
+    if @report.update(report_params)
+      flash[:notice] = "Report has been successfully updated"
+      redirect_to report_path(@report)
+    else
+      flash[:error] = @report.errors.full_messages.join(", ")
+      redirect_to edit_report_path(@report)
+    end
   end
 
   # POST reports/confirm # creates a new confirmed issue
   def confirm
     @report = Report.find_by_id(params[:id])
 
-    if !@report.confirmed?
+
       #changes status to confirmed
       @report.status = :confirmed
 
@@ -72,15 +87,15 @@ class ReportsController < ApplicationController
       ci = @report.confirmed_issues.create(confirmed_issue_params)
 
       #redirect to edit confirmed issue form with ci data
-      redirect_to edit_confirmed_issue_path(ci)
-    end
+      return redirect_to edit_confirmed_issue_path(ci)
+
   end
 
   private
 
   def report_params
     params.require(:report).permit(:title, :latitude, :longitude, :description,
-                                   :category, :major_road, :address,
+                                   :category, :major_road, :address, :status,
                                    :cross_street1, :cross_street2, :danger_level)
   end
 

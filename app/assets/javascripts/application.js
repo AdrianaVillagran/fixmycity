@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require materialize-sprockets
-//= require turbolinks
+
 //= require underscore
 //= require gmaps/google
 //= require_tree .
@@ -29,6 +29,8 @@ $(document).on("ready page:load", function(){
     console.log("sanity check!")
     $('.modal-trigger').leanModal();
 
+    $(".dropdown-button").dropdown();
+
     $(window).resize(function(){
       setMapHeight();
     });
@@ -41,7 +43,7 @@ $(document).on("ready page:load", function(){
       var data_hash = window.data_hash
       markers = handler.addMarkers(data_hash);
       handler.bounds.extendWith(markers);
-      handler.getMap().setZoom(13);
+      handler.getMap().setZoom(14);
       handler.map.centerOn({ lat: 37.7749, lng: -122.4194 })
     });
 });

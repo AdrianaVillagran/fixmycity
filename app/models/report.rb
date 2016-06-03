@@ -9,4 +9,8 @@ class Report < ActiveRecord::Base
                   "Other"]
   enum status: [:active, :confirmed, :flagged, :deleted, :hidden]
   enum danger_level: ["Mild", "Moderate", "Severe"]
+
+  def report_with_id
+    "Report ##{id}"
+  end
 end

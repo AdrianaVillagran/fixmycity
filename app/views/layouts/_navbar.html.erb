@@ -2,6 +2,13 @@
   <div class="nav-wrapper blue-grey lighten-1">
     <a href="/reports" class="brand-logo">Fix My City</a>
     <ul class="right hide-on-med-and-down">
+      <% if current_user %>
+        <li><%= link_to "Profile", user_path(current_user) %></li>
+        <li><%= link_to "Log Out", logout_path %></li>
+      <% else %>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+        <li><%= link_to "Log In", login_path %></li>
+      <% end %>
       <li>
         <% flash.each do |name, msg| %>
           <div class="chip <% if name=="error" || name=="alert" %> red <% else %> green lighten-1 <% end %>">
@@ -15,14 +22,3 @@
     </ul>
   </div>
 </nav>
-
-<!-- Modal Structure -->
-<div id="report-modal" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Report an Issue</h4>
-    <%= render "reports/form" %>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" data-no-turbolink="true" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-  </div>
-</div>

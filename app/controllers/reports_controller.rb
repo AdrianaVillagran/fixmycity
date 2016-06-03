@@ -77,31 +77,17 @@ class ReportsController < ApplicationController
   def confirm
     @report = Report.find_by_id(params[:id])
 
+    #changes status to confirmed
+    @report.status = :confirmed
 
-      #changes status to confirmed
-      @report.status = :confirmed
+    #updates the report
+    @report.confirmed!
 
-      #updates the report
-      @report.confirmed!
+    #create a new confirmed issue record with inherited attributes from report
+    ci = @report.confirmed_issues.create(confirmed_issue_params(@report))
 
-      #store relevant attributes from report
-      confirmed_issue_params = {
-        title: @report.title,
-        category: @report.category,
-        danger_level: @report.danger_level,
-        major_road: @report.major_road,
-        cross_street1: @report.cross_street1,
-        cross_street2: @report.cross_street2,
-        latitude: @report.latitude,
-        longitude: @report.longitude
-        }
-
-      #create a new confirmed issue record
-      ci = @report.confirmed_issues.create(confirmed_issue_params)
-
-      #redirect to edit confirmed issue form with ci data
-      return redirect_to edit_confirmed_issue_path(ci)
-
+    #redirect to edit confirmed issue form with ci data
+    return redirect_to edit_confirmed_issue_path(ci)
   end
 
   def hide
@@ -114,6 +100,20 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def confirmed_issue_params(report)
+    confirmed_issue_params = {
+      title: report.title,
+      category: report.category,
+      danger_level: report.danger_level,
+      major_road: report.major_road,
+      cross_street1: report.cross_street1,
+      cross_street2: report.cross_street2,
+      latitude: report.latitude,
+      longitude: report.longitude
+      }
+
+  end
 
   def report_params
     params.require(:report).permit(:title, :latitude, :longitude, :description,

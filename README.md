@@ -47,6 +47,10 @@ rake db:seed
 ![Alt text](public/screenshots/report_show.png "Report Show Page")
 
 #### Wireframes
+[Wireframes](https://drive.google.com/file/d/0BzrMT0_EhgQQNEgzN2dTaldjSkdGQW9CcHl2b2ExZ2MxdmQ0/view?usp=sharing)
+
+#### ERD
+[ERD](https://drive.google.com/file/d/0BzrMT0_EhgQQeWgtc2poNHFPaDAyalRBY3hQazMtaVM5Mmdr/view?usp=sharing)
 
 #### User Stories
 [In-Progress User Stories](https://docs.google.com/document/d/1NeaSV7VfQ83cLsrWC00vbU430tkuhC8d-SqvqPdfAF0/edit?usp=sharing)

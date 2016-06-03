@@ -31,12 +31,12 @@
   </div>
   <div class="col s4">
     <%= f.label :status %>
-    <%= f.select(:status, [:active, :confirmed, :flagged, :deleted, :hidden], {}, {:class => "browser-default"})%>
+    <%= f.select(:status, [:active, :flagged, :hidden], {}, {:class => "browser-default"})%>
   </div>
 
 </div>
 <div class="s6">
-<%= f.submit "Submit", class: "modal-action modal-close btn waves-effect waves-light"%>
+<%= f.submit "Submit", class: "btn waves-effect waves-light"%>
 </div>
 
 

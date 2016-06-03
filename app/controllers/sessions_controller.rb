@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Successfully logged in!"
       redirect_to @user
     else
-      flash[:error] = @user.errors.full_messages.join(", ")
+      flash[:error] = "Oops! Wrong credentials."
       redirect_to login_path
     end
   end

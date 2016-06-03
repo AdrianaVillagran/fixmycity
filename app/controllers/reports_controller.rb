@@ -43,23 +43,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  #
-  # def find_related
-  #   @report = Report.new
-  #
-  #   # find all records
-  #   @reports = Report.all
-  #
-  #   @reports.each do |report|
-  #     distance = 0.1
-  #     @all_centers = []
-  #     @all_centers.push([report.latitude, report.longitude])
-  #
-  #     #
-  #   end
-  #   render :related
-  # end
-
   def edit
     @report = Report.find_by_id(params[:id])
   end
@@ -70,7 +53,7 @@ class ReportsController < ApplicationController
       flash[:notice] = "Report has been successfully updated"
       redirect_to report_path(@report)
     else
-      flash[:error] = @report.errors.full_messages
+      flash[:error] = @report.errors.full_messages.join(", ")
       redirect_to edit_report_path(@report)
     end
   end

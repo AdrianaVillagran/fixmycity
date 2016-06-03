@@ -27,11 +27,17 @@ class ConfirmedIssuesController < ApplicationController
   end
 
   def edit
-    reports = Report.all
-    @unconfirmed_reports = []
-    reports.each do |report|
-      if !report.confirmed?
-        @unconfirmed_reports << report
+
+    ci_report = @confirmed_issue.reports[0]
+    distance = 0.1
+    center_point = [ci_report.latitude, ci_report.longitude]
+    box = Geocoder::Calculations.bounding_box(center_point, distance)
+    near_reports = Report.within_bounding_box(box)
+
+    @similar_reports = []
+    near_reports.each do |report|
+      if ci_report.id != report.id
+        @similar_reports << report
       end
     end
 
@@ -40,20 +46,23 @@ class ConfirmedIssuesController < ApplicationController
   def update
     @confirmed_issue.update(confirmed_issue_params)
 
-    # filter through reports id array in params
-    params[:confirmed_issue][:id].each do |id|
-      if !id.blank?
-        # find reports by id's in array
-        report = Report.find(id.to_i)
+    if !params[:confirmed_issue][:id].blank?
 
-        # push reports into confirmed_issue
-        # hacky but it works :/
-        @confirmed_issue.reports << report
+      # filter through reports id array in params
+      params[:confirmed_issue][:id].each do |id|
+        if !id.blank?
+          # find reports by id's in array
+          report = Report.find(id.to_i)
 
-        # updates each report status to confirmed
-        @confirmed_issue.reports.each do |report|
-          report.status = :confirmed
-          report.confirmed!
+          # push reports into confirmed_issue
+          # hacky but it works :/
+          @confirmed_issue.reports << report
+
+          # updates each report status to confirmed
+          @confirmed_issue.reports.each do |report|
+            report.status = :confirmed
+            report.confirmed!
+          end
         end
       end
     end

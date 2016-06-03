@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post "/sessions", to: "sessions#create"
   get "/logout", to: "sessions#destroy"
 
-
+  post 'reports/:id/hide', to: "reports#hide", as: 'hide_report'
   post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
   resources :reports
   resources :confirmed_issues

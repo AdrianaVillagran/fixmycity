@@ -6,14 +6,17 @@ class ReportsController < ApplicationController
     @report = Report.new
     @reports = Report.all
     @hash = Gmaps4rails.build_markers(@reports) do |report, marker|
-      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
-      marker.lat report.latitude
-      marker.lng report.longitude
-      marker.infowindow "<b>Report ##{report.id}</b><br>
-                        #{report.title}<br>
-                        Category: #{report.category}<br>
-                        #{report.address}<br>
-                        #{report_path}<br>"
+      if !report.hidden?
+        report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
+        marker.lat report.latitude
+        marker.lng report.longitude
+        marker.infowindow "<b>Report ##{report.id}</b><br>
+                          #{report.title}<br>
+                          Category: #{report.category}<br>
+                          #{report.address}<br>
+                          #{report_path}<br>"
+
+      end
     end
   end
 
@@ -25,23 +28,16 @@ class ReportsController < ApplicationController
   end
 
   def show
-    p params[:id]
     @report = Report.find_by_id(params[:id])
-
-    distance = 0.1
-    center_point = [@report.latitude, @report.longitude]
-    box = Geocoder::Calculations.bounding_box(center_point, distance)
-    @related_reports = Report.within_bounding_box(box)
-
-    @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
-      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
-      marker.lat report.latitude
-      marker.lng report.longitude
-      marker.infowindow "<b>Report ##{report.id}</b><br>
-                        #{report.title}<br>
-                        Category: #{report.category}<br>
-                        #{report.address}<br>
-                        #{report_path}<br>"
+    if !@report.hidden?
+      return map_related_reports(@report)
+    else
+      if !current_user || !current_user.admin?
+        flash[:alert] = "That report has been removed."
+        return redirect_to reports_path
+      elsif current_user.admin?
+        map_related_reports(@report)
+      end
     end
   end
 
@@ -60,7 +56,25 @@ class ReportsController < ApplicationController
     end
   end
 
-  # POST reports/confirm # creates a new confirmed issue
+  def map_related_reports(report)
+    distance = 0.1
+    center_point = [report.latitude, report.longitude]
+    box = Geocoder::Calculations.bounding_box(center_point, distance)
+    @related_reports = Report.within_bounding_box(box)
+
+    @hash = Gmaps4rails.build_markers(@related_reports) do |report, marker|
+      report_path = view_context.link_to "View Details", report_path(report), :"data-no-turbolink" => true
+      marker.lat report.latitude
+      marker.lng report.longitude
+      marker.infowindow "<b>Report ##{report.id}</b><br>
+                        #{report.title}<br>
+                        Category: #{report.category}<br>
+                        #{report.address}<br>
+                        #{report_path}<br>"
+    end
+  end
+
+  # POST reports/:id/confirm # creates a new confirmed issue
   def confirm
     @report = Report.find_by_id(params[:id])
 
@@ -89,6 +103,15 @@ class ReportsController < ApplicationController
       #redirect to edit confirmed issue form with ci data
       return redirect_to edit_confirmed_issue_path(ci)
 
+  end
+
+  def hide
+    @report = Report.find_by_id(params[:id])
+
+    @report.status = :hidden
+    @report.hidden!
+
+    redirect_to reports_path
   end
 
   private

@@ -5,16 +5,10 @@ class ApplicationController < ActionController::Base
 
   def authorize
 
-    if !current_user
-      flash[:alert] = "Whoops, you are not an admin!"
-      return redirect_to '/'
-    elsif !current_user.admin?
+    if !current_user || !current_user.admin?
       flash[:alert] = "Whoops, you are not an admin!"
       redirect_to '/'
     end
-
-
-
 
   end
 

@@ -2,15 +2,22 @@
   <div class="col s3 sidebar">
     <h5>All User Reports</h5>
     <% @reports.each do |report| %>
-      <b>Report #<%= report.id %></b> <br>
-      <%= link_to report.title, report_path(report) %> <br>
-      Status: <%= report.status %> <br><br>
+      <div class="chip <% if report.status=="flagged"%> red <% elsif report.status=="confirmed" %> green lighten-1 <%else %> indigo accent-2 <% end %> right">
+        <span class="white-text"><%= report.status %></span>
+      </div>
+        <div class="">
+          <b>Report #<%= report.id %></b> <br>
+          <%= link_to report.title, report_path(report) %> <br>
+        </div>
+
+        <br><br>
+
     <% end %>
   </div>
   <div class="col s9">
-    <div class="fixed-action-btn" style="top: 70px; right: 24px;">
+    <div class="fixed-action-btn" style="top: 70px; right: 24px; z-index: 3">
       <a class="modal-trigger waves-effect waves-light red btn"
-         href="#report-modal">Report an Issue</a>
+         href="#report-modal">Make a Report</a>
     </div>
     <%= render "map" %>
   </div>

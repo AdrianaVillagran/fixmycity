@@ -4,11 +4,22 @@ Rails.application.routes.draw do
 
   get 'site/index'
 
+  # User routes
+
+  resources :users
+  # # get 'users', to: "users#index", as: "users"
+  # get 'users/new', to: 'users#new', as: "new_user"
+  # post 'users', to: 'users#create', as: "create_user"
+  # get 'users/:id', to: 'users#show', as: 'user'
+
+
+  # Sessions routes
+  get "/login", to: "sessions#new"
+  post "/sessions", to: "sessions#create"
+  get "/logout", to: "sessions#destroy"
+
+
   post 'reports/:id/confirm', to: "reports#confirm", as: 'confirm_report'
-
-  get 'related_reports', to: "reports#find_related", as: 'find_related_reports'
-
-
   resources :reports
   resources :confirmed_issues
 

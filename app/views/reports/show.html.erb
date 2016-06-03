@@ -8,7 +8,7 @@
       <% end %>
     <% end %>
 
-    <h4>Report #<%= @report.id %></h4>
+    <h4 class="red-text">Report #<%= @report.id %></h4>
     <span class="flow-text">  <strong>Status: </strong>  <%= @report.status %>
           <% if @report.confirmed? %>
             <i class="small material-icons green-text">done</i>
